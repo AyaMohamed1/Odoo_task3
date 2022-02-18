@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+
+<!--        menu item ** action -->
+        <record id="doctor_form_view" model="ir.ui.view">
+            <field name="name">HMS Doctor form view</field>
+            <field name="model">doctor.doctor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string = 'Doctor Info'>
+                                <field name="first_name"/>
+                                <field name="last_name"/>
+                                <field name="image"/>
+                                <field name="patient_ids"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="doctor_action" model="ir.actions.act_window">
+            <field name="name">doctor</field>
+            <field name="res_model">doctor.doctor</field>
+        </record>
+        <menuitem id="doctor_data_menu"
+                  name="Doctor"
+                  parent="patients_root_menu"
+                  action="doctor_action"/>
+    </data>
+</odoo>

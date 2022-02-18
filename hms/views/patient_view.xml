@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+<!--        menu item ** action -->
+        <record id="patients_form_view" model="ir.ui.view">
+            <field name="name">HMS patients form view</field>
+            <field name="model">patients.patients</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string = 'General Info'>
+                                <field name="first_name" required="True"/>
+                                <field name="last_name" required="True"/>
+                                <field name = 'email'/>
+                                <field name="birthdate"/>
+                                <field name="age"/>
+                                <field name="blood_type"/>
+                                <field name="cr_ratio" attrs="{'required':[('pcr','=',True)]}"/>
+                                <field name="pcr"/>
+                                <field name="address"/>
+                                <field name="image"/>
+                                <field name="states" widget="statusbar"/>
+                                <field name="department_id" domain="[('is_opened','=',True)]"/>
+                                <field name="doctor_id" attrs="{'readonly': [('department_id', '=', False)]}"/>
+                            </group>
+                            <group string= 'Patient History' attrs="{'invisible':[('age','&lt;',50)]}">
+                                <field name="history" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="patient_action" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">patients.patients</field>
+        </record>
+
+
+        <menuitem id="patients_root_menu" name="HMS Hospital"/>
+        <menuitem id="patients_data_menu"
+                  name="Patients"
+                  parent="patients_root_menu"
+                  action="patient_action"/>
+    </data>
+</odoo>
